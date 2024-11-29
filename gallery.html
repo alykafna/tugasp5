@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Page with Sliding Slideshow</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/Cover/Bunga.jpeg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .overlay {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 110vh;
+              background-color: rgba(255, 255, 255, 0.7);
+              z-index: 1;
+              background-size: cover;
+            }
+
+           /* Responsif untuk mobile */
+           @media (max-width: 768px) {
+          .overlay {
+              height: 100vh; /* atau sesuaikan dengan tinggi yang diinginkan pada mobile */
+              }
+            }
+
+            /* Animasi */
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .slideshow-container {
+            width: 100%;
+            overflow: hidden; /* Menghilangkan scroll */
+            position: relative; /* Agar elemen di dalamnya bisa posisional */
+        }
+
+        .slides {
+            display: flex; /* Menjadikan slide sebagai flex container */
+            transition: transform 0.5s ease-in-out;
+            width: 100%; /* Memastikan lebar 100% dari kontainer */
+        }
+
+        .slide {
+            min-width: 100%;
+            display: flex; /* Menjadikan slide sebagai flex container */
+            justify-content: center; /* Menyelaraskan gambar di tengah */
+            align-items: center; /* Menyelaraskan gambar secara vertikal */
+        }
+
+        .slide img {
+            width: 30%; /* Ukuran gambar menjadi 50% dari kontainer di desktop */
+            height: auto; /* Tinggi disesuaikan agar tetap proporsional */
+            display: block;
+            margin: 0 auto; /* Memposisikan gambar di tengah */
+            border-radius: 10px; /* Membuat sisi samping jadi lingkar */
+        }
+
+        /* Style khusus untuk mobile */
+        @media (max-width: 600px) {
+        .slide img {
+            width: 90%; /* Memperbesar gambar menjadi 90% dari kontainer di mobile */
+            height: auto; /* Tinggi disesuaikan agar tetap proporsional */
+           }
+        }
+
+        /* Navigasi Bawah */
+        .navbar {
+              position: fixed;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              height: 10%;
+              background-color: rgba(150, 167, 165, 0.8);
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              padding: 10px 0;
+              box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+              z-index: 2; /* Konten card berada di atas overlay */
+            }
+
+           /* Ikon Navigasi */
+           .navbar a {
+              position: relative;
+              text-decoration: none;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+           .navbar img {
+              width: 30px; /* Ukuran ikon yang lebih kecil */
+              height: 30px;
+              transition: transform 0.3s ease;
+            }
+
+           .navbar img:hover {
+              transform: scale(1.2); /* Efek zoom saat hover */
+            }
+
+           /* Efek latar belakang berpindah saat ikon ditekan */
+           .navbar a.active::before {
+              content: '';
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 50px;
+              height: 50px;
+              background-color: rgba(208, 201, 247, 1.0); /* Warna latar belakang */
+              border-radius: 10px;
+              transform: translate(-50%, -50%);
+              z-index: -1;
+              animation: backgroundMove 0.5s ease;
+            }
+
+            /* Efek latar belakang bergerak */
+            @keyframes backgroundMove {
+               0% {
+               background-position: left;
+               }
+               100% {
+               background-position: right;
+               }
+            }
+
+            /* Responsive untuk tablet dan laptop */
+            @media (min-width: 601px) {
+            .navbar img {
+              width: 30px; /* Ukuran ikon untuk tablet dan laptop */
+              height: 30px;
+              }
+            }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <h2 class="gallery-title">Gallery</h2>
+        <div class="slideshow-container">
+            <div class="slides">
+                <div class="slide">
+                    <img src="/img/foto1.jpeg" alt="Foto mempelai 1">
+                </div>
+                <div class="slide">
+                    <img src="/img/foto2.jpeg" alt="Foto mempelai 2">
+                </div>
+                <div class="slide">
+                    <img src="/img/foto3.jpeg" alt="Foto mempelai 3">
+                </div>
+                <div class="slide">
+                    <img src="/img/foto4.jpeg" alt="Foto mempelai 4">
+                </div>
+                <div class="slide">
+                    <img src="/img/foto5.jpeg" alt="Foto mempelai 5">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="/pages/home.html">
+            <img src="/icon/home.png" alt="Home">
+        </a>
+        <a href="/pages/favorites.html">
+            <img src="/icon/Favorites.png" alt="Favorites">
+        </a>
+        <a href="/pages/Calendar.html">
+            <img src="/icon/calender.png" alt="Calendar">
+        </a>
+        <a href="/pages/messages.html">
+            <img src="/icon/ChatQuote.png" alt="Messages">
+        </a>
+        <a href="/pages/gift.html">
+            <img src="/icon/Gift.png" alt="Gift">
+        </a>
+        <a href="/pages/gallery.html" class="active">
+            <img src="/icon/gallery.png" alt="Gallery">
+        </a>
+        <a href="/pages/list.html">
+            <img src="/icon/list.png" alt="List">
+        </a>
+    </div>
+<script>
+    // Menunggu hingga seluruh konten DOM (Document Object Model) selesai dimuat
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Mendeklarasikan variabel 'currentIndex' untuk melacak indeks slide yang sedang ditampilkan
+    let currentIndex = 0;
+
+    // Mendapatkan elemen 'slides' yang merupakan kontainer untuk semua slide
+    const slides = document.querySelector('.slides');
+    
+    // Menghitung total jumlah slide dengan mengambil semua elemen dengan class 'slide'
+    const totalSlides = document.querySelectorAll('.slide').length;
+
+    // Fungsi untuk menampilkan slide berdasarkan indeks tertentu
+    function showSlide(index) {
+        // Menghitung offset untuk menggeser slide (setiap slide memiliki lebar 100%)
+        const offset = -index * 100;
+        // Menerapkan transformasi untuk menggeser slide sesuai dengan indeks
+        slides.style.transform = `translateX(${offset}%)`;
+    }
+
+    // Fungsi untuk memulai slideshow secara otomatis
+    function startSlideshow() {
+        // Mengatur interval untuk beralih ke slide berikutnya setiap 3 detik
+        setInterval(() => {
+            // Menambah indeks slide, kembali ke 0 jika mencapai slide terakhir
+            currentIndex = (currentIndex + 1) % totalSlides;
+            // Memanggil fungsi 'showSlide' untuk menampilkan slide berikutnya
+            showSlide(currentIndex);
+        }, 3000); // Ubah slide setiap 3 detik
+    }
+
+    // Memulai slideshow setelah DOM selesai dimuat
+    startSlideshow();
+});
+    </script>
+</body>
+</html>

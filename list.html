@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e0f7f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('/Cover/Bunga.jpeg'); /* Add your background image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120vh;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 1;
+            background-size: cover;
+        }
+        
+        /* Content */
+        .content {
+            text-align: center;
+            padding: 30px 20px;
+            border-top-left-radius: 100px;
+            border-top-right-radius: 100px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            background-color: rgba(150, 167, 165, 0.8);
+            border: 5px solid rgba(208, 201, 247, 1.0);
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            width: 100%;
+            margin: 20px auto;
+            min-height: 50vh; /* Latar belakang minimal sepanjang 80% dari tinggi viewport */
+        }
+
+       /* Responsive Design */
+       @media (max-width: 768px) {
+       .content {
+           padding: 20px 15px; /* Kurangi padding di tampilan mobile */
+           max-width: 90%; /* Buat lebar konten lebih kecil di mobile */
+           border-top-left-radius: 100px; /* Pastikan bagian atas tetap melengkung */
+           border-top-right-radius: 100px;
+           border-bottom-left-radius: 10px; /* Lengkungan lebih kecil di bagian bawah */
+           border-bottom-right-radius: 10px;
+           }
+        }
+
+        h2 {
+          font-size: 26px; /* Ukuran font judul */
+          margin-bottom: 15px;
+          animation: slideDown 1s ease-out;
+        }
+
+        p {
+          font-size: 18px; /* Ukuran font paragraf */
+          margin: 15px 0; /* Jarak antar paragraf */
+          line-height: 1.6; /* Jarak antar baris */
+          animation: fadeIn 1.5s ease-in-out;
+        }
+
+        h3 {
+          font-size: 22px;
+          margin: 20px 0;
+          animation: zoomIn 1.2s ease-out;
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 10px 0;
+        }
+
+        li {
+          font-size: 16px;
+          margin-bottom: 5px;
+          animation: fadeIn 2s ease-in-out;
+        }
+
+        .contact-info p {
+           font-size: 14px;
+           margin-top: 10px;
+           animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        a {
+          color: #0066cc;
+          text-decoration: none;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+
+       /* Responsive Design */
+       @media (max-width: 768px) {
+       .content {
+          padding: 30px;
+          max-width: 90%;
+         }
+
+         .names-container h2, .names-container h3 {
+            color: white;
+            margin: 10px 0;
+        }
+
+        /* Styling for the names */
+        .names-container h2 {
+            font-size: 36px; /* Font size for names */
+            font-weight: normal;
+            color: white;
+            margin: 0 10px; /* Spacing between names and & symbol */
+        }
+
+        .names-container .ampersand {
+            font-size: 28px; /* Font size for & */
+            font-weight: lighter;
+            color: white;
+            margin: 0 10px; /* Spacing for the & */
+        }
+
+        p, li {
+          font-size: 14px;
+        }
+
+        .contact-info p {
+          font-size: 12px;
+        } 
+
+        .overlay {
+          height: 100vh;
+        }
+      }
+
+      /* Responsive styling for smaller screens */
+      @media (max-width: 768px) {
+            .names-container {
+                flex-direction: column; /* Stack the names vertically on mobile */
+            }
+
+            .names-container h2 {
+                font-size: 24px;
+                margin: 5px 0;
+            }
+
+            .names-container .ampersand {
+                font-size: 20px;
+                margin: 5px 0;
+            }
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: rgba(150, 167, 165, 0.8);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+
+        /* Navigation icons */
+        .navbar a {
+            position: relative;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar img {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar img:hover {
+            transform: scale(1.2);
+        }
+
+        /* Active navigation background effect */
+        .navbar a.active::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(208, 201, 247, 1.0);
+            border-radius: 10px;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: backgroundMove 0.5s ease;
+        }
+
+        /* Background animation */
+        @keyframes backgroundMove {
+            0% {
+                background-position: left;
+            }
+            100% {
+                background-position: right;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tambahkan iframe ini di halaman undangan -->
+<iframe src="/pages/audio.html" style="display:none;" id="audio-frame"></iframe>
+
+    <div class="overlay"></div>
+
+    <div class="content">
+        <h2>Terima Kasih</h2>
+        <p>Atas Kehadiran & Doa Restunya</p>
+        <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami sekeluarga apabila Bapak/Ibu/Saudara/I berkenan hadir untuk memberikan doa restu kepada kedua mempelai.</p>
+        <!-- Content for names -->
+    <div class="names-container">
+        <h2>Zidan</h2>
+        <h3 class="ampersand">&</h3>
+        <h2>Alyka</h2>
+    </div>
+        <p>Turut Mengundang:</p>
+        <ul>
+            <li>Keluarga Besar Bpk.Putra & Ibu Putri</li>
+            <li>Keluarga Besar Bpk.Dewa & Ibu Dewi</li>
+        </ul>
+        <p>Dan seluruh keluarga lainnya.</p>
+        <p>Wassalamualaikum Warahmatullahi Wabarakatuh</p>
+        <div class="contact-info">
+            <p>Email: <a href="mailto:alykabjm26@gmail.com">alykabjm26@gmail.com</a></p>
+            <p>Instagram: <a href="https://www.instagram.com/zy_undangan_digital" target="_blank">@zy_undangan_digital</a></p>  
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="/pages/home.html">
+            <img src="/icon/home.png" alt="Home">
+        </a>
+        <a href="/pages/favorites.html">
+            <img src="/icon/Favorites.png" alt="Favorites">
+        </a>
+        <a href="/pages/Calendar.html">
+            <img src="/icon/calender.png" alt="Calendar">
+        </a>
+        <a href="/pages/messages.html">
+            <img src="/icon/ChatQuote.png" alt="Messages">
+        </a>
+        <a href="/pages/gift.html">
+            <img src="/icon/Gift.png" alt="Gift">
+        </a>
+        <a href="/pages/gallery.html">
+            <img src="/icon/gallery.png" alt="Gallery">
+        </a>
+        <a href="/pages/list.html" class="active">
+            <img src="/icon/list.png" alt="List">
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('.navbar a');
+            links.forEach(link => {
+                link.addEventListener('click', function() {
+                    links.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

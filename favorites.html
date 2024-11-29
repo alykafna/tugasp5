@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan</title>
+    <style>
+        /* Mengatur styling dasar */
+        * {
+            margin: 0;
+            padding: 5px 5px;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/Cover/Bunga.jpeg'); /* Ganti dengan path gambar cover Anda */
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Transparent overlay */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.6); /* Transparan */
+            z-index: -1; /* Letakkan di belakang konten */
+        }
+
+        .container {
+            position: relative;
+            z-index: 2; /* Konten card berada di atas overlay */
+            background-color: rgba(150, 167, 165, 0.8); /* Background color */
+            border-radius: 20px; /* Rounded corners */
+            padding: 20px;
+            margin-top: 50px;
+            margin-bottom: 100px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+         /* Responsive Width */
+           width: 90%; /* Default for smaller screens */
+           max-width: 1000px; /* Limit the maximum width on larger screens */
+        }
+
+        /* For larger screens (tablet and desktop) */
+        @media (min-width: 768px) {
+       .container {
+           width: 80%; /* Increase width on medium-sized screens */
+           }
+        }
+
+        /* For very large screens (desktops) */
+        @media (min-width: 1200px) {
+        .container {
+           width: 70%; /* Decrease width slightly to look balanced */
+           }
+        }
+
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile {
+            margin: 10px 0;
+        }
+
+        .profile-picture img {
+            border-radius: 100%; /* Membuat gambar bulat */
+            border: 1px solid #000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 180px;
+            height: auto;
+        }
+
+        .name, .details {
+            margin-top: 10px;
+        }
+
+        /* Flexbox for photos */
+        @media (min-width: 768px) {
+            .profile-container {
+                flex-direction: row; /* Horizontal layout di desktop */
+            }
+        }
+
+        /* Animation Styles */
+        .animated-text, .profile {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+            font-size: 18px;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navigasi Bawah */
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(150, 167, 165, 0.8);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 2; /* Konten card berada di atas overlay */
+        }
+
+        .navbar a {
+            position: relative;
+            text-decoration: none;
+        }
+
+        .navbar img {
+            width: 40px !important;
+            height: 40px !important;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar img:hover {
+            transform: scale(1.3);
+        }
+
+        .navbar a.active {
+            background-color: rgba(208, 201, 247, 1.0);
+            border-radius: 10px;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Tambahkan iframe ini di halaman undangan -->
+<iframe src="/pages/audio.html" style="display:none;" id="audio-frame"></iframe>
+
+
+    <div class="container">
+        <div class="invitation">
+            <p class="animated-text">Dengan penuh rasa syukur kepada Allah SWT,</p>
+            <p class="animated-text">kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara pernikahan kami:</p>
+
+            <div class="profile-container">
+                <div class="profile">
+                    <div class="profile-picture">
+                        <img src="/img/Jaemin.jpeg" alt="Muhammad Al-Zidan">
+                    </div>
+                    <p class="name animated-text">Muhammad Al-Zidan Putra</p>
+                    <p class="details animated-text">Bin</p>
+                    <p class="details animated-text">Bapak Sulaiman & Ibu Siti Jaleha</p>
+                </div>
+
+                <div class="profile">
+                    <div class="profile-picture">
+                        <img src="/img/Alyka.jpeg" alt="Alyka Fairuz Nur Azizah">
+                    </div>
+                    <p class="name animated-text">Alyka Fairuz Nur Azizah</p>
+                    <p class="details animated-text">Binti</p>
+                    <p class="details animated-text">Bapak Muhammad Suhardi & Ibu Fatmawati</p>
+                </div>
+            </div>
+
+            <p class="animated-text">Merupakan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu pada acara sakral ini.</p>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="/pages/home.html">
+            <img src="/icon/home.png" alt="Home">
+        </a>
+        <a href="/pages/favorites.html" class="active">
+            <img src="/icon/Favorites.png" alt="Favorites">
+        </a>
+        <a href="/pages/Calendar.html">
+            <img src="/icon/calender.png" alt="Calendar">
+        </a>
+        <a href="/pages/messages.html">
+            <img src="/icon/ChatQuote.png" alt="Messages">
+        </a>
+        <a href="/pages/gift.html">
+            <img src="/icon/Gift.png" alt="Gift">
+        </a>
+        <a href="/pages/gallery.html">
+            <img src="/icon/gallery.png" alt="Gallery">
+        </a>
+        <a href="/pages/list.html">
+            <img src="/icon/list.png" alt="List">
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('.navbar a');
+            links.forEach(link => {
+                link.addEventListener('click', function() {
+                    links.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

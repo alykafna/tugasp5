@@ -1,0 +1,276 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RSVP & Denah Lokasi</title>
+        <style>
+            /* Base Reset */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: Arial, sans-serif;
+                background-image: url('/Cover/Bunga.jpeg');
+                background-size: cover;
+                background-position: center;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+                animation: fadeIn 1.5s ease-in-out;
+            }
+
+            /* Default untuk desktop */
+           .overlay {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 150vh;
+              background-color: rgba(255, 255, 255, 0.7);
+              z-index: 1;
+              background-size: cover;
+            }
+
+           /* Responsif untuk mobile */
+           @media (max-width: 768px) {
+          .overlay {
+              height: 110vh; /* atau sesuaikan dengan tinggi yang diinginkan pada mobile */
+              }
+            }
+
+            /* Animasi */
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+    
+            /* Container utama */
+            .container {
+                position: relative;
+                z-index: 2; /* Konten card berada di atas overlay */
+                text-align: center;
+                padding: 20px;
+                margin-bottom: 50px;
+                width: 100%;
+                max-width: 500px;
+            }
+    
+            h1 {
+                font-size: 24px;
+                margin-bottom: 20px;
+                font-style: italic;
+                color: #333;
+            }
+    
+            /* Map styling */
+            .map {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+    
+            .map iframe {
+                width: 100%;
+                height: 300px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                border: none;
+            }
+    
+            /* Form RSVP */
+            .rsvp-container {
+                background-color: rgba(150, 167, 165, 0.8); /* Transparansi putih lebih solid */
+                padding: 20px;
+                border-radius: 15px; /* Melengkungkan sudut untuk form dan judul */
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+    
+            .rsvp-form {
+                display: flex;
+                flex-direction: column;
+                background-color: transparent; /* Menghilangkan background form, cukup transparansi container */
+                gap: 10px;
+                animation: slideUp 1s ease-in-out forwards;
+            }
+    
+            .rsvp-form input, .rsvp-form select, .rsvp-form textarea {
+                width: 100%;
+                padding: 10px;
+                border-radius: 8px;
+                border: 1px solid #ccc;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+    
+            .rsvp-form input:focus, .rsvp-form select:focus, .rsvp-form textarea:focus {
+                transform: scale(1.05);
+            }
+    
+            .rsvp-form textarea {
+                resize: none;
+            }
+    
+            .rsvp-form button {
+                background-color: #f8c5d8;
+                color: #333;
+                border: none;
+                border-radius: 10px;
+                padding: 10px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+    
+            .rsvp-form button:hover {
+                background-color: #e082a0;
+            }
+    
+            /* Animasi form */
+            @keyframes slideUp {
+                from { transform: translateY(20px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+    
+            /* Navigasi Bawah */
+           .navbar {
+              position: fixed;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              height: 10%;
+              background-color: rgba(150, 167, 165, 0.8);
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              padding: 10px 0;
+              box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+              z-index: 2; /* Konten card berada di atas overlay */
+            }
+
+           /* Ikon Navigasi */
+           .navbar a {
+              position: relative;
+              text-decoration: none;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+           .navbar img {
+              width: 30px; /* Ukuran ikon yang lebih kecil */
+              height: 30px;
+              transition: transform 0.3s ease;
+            }
+
+           .navbar img:hover {
+              transform: scale(1.2); /* Efek zoom saat hover */
+            }
+
+           /* Efek latar belakang berpindah saat ikon ditekan */
+           .navbar a.active::before {
+              content: '';
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 50px;
+              height: 50px;
+              background-color: rgba(208, 201, 247, 1.0); /* Warna latar belakang */
+              border-radius: 10px;
+              transform: translate(-50%, -50%);
+              z-index: -1;
+              animation: backgroundMove 0.5s ease;
+            }
+
+            /* Efek latar belakang bergerak */
+            @keyframes backgroundMove {
+               0% {
+               background-position: left;
+               }
+               100% {
+               background-position: right;
+               }
+            }
+
+            /* Responsive untuk tablet dan laptop */
+            @media (min-width: 601px) {
+            .navbar img {
+              width: 30px; /* Ukuran ikon untuk tablet dan laptop */
+              height: 30px;
+              }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Tambahkan iframe ini di halaman undangan -->
+<iframe src="/pages/audio.html" style="display:none;" id="audio-frame"></iframe>
+
+        <div class="overlay"></div> <!-- Overlay Transparan -->
+        <div class="container">
+            <h1>Denah Lokasi</h1>
+            <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.192414603344!2d114.57282307406153!3d-3.302507541152042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de42312c676b753%3A0x82f4aeb0369d72b!2sGedung%20Chandra!5e0!3m2!1sid!2sid!4v1727309119315!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+    
+            <div class="rsvp-container">
+                <h1>--RSVP--</h1>
+                <form class="rsvp-form">
+                    <input type="text" placeholder="Nama Anda" required>
+                    <input type="email" placeholder="Email" required>
+                    <select required>
+                        <option value="" disabled selected>Bersedia Hadir di Acara Kami?</option>
+                        <option value="yes">Ya, Bersedia</option>
+                        <option value="no">Tidak</option>
+                    </select>
+                    <textarea placeholder="Ucapan Doa" rows="4"></textarea>
+                    <button type="submit">Kirim Pesan</button>
+                </form>
+            </div>
+        </div>
+    
+        <!-- Navbar -->
+        <div class="navbar">
+            <a href="/pages/home.html">
+                <img src="/icon/home.png" alt="Home">
+            </a>
+            <a href="/pages/favorites.html">
+                <img src="/icon/Favorites.png" alt="Favorites">
+            </a>
+            <a href="/pages/Calendar.html">
+                <img src="/icon/calender.png" alt="Calendar">
+            </a>
+            <a href="/pages/messages.html" class="active">
+                <img src="/icon/ChatQuote.png" alt="Messages">
+            </a>
+            <a href="/pages/gift.html">
+                <img src="/icon/Gift.png" alt="Gift">
+            </a>
+            <a href="/pages/gallery.html">
+                <img src="/icon/gallery.png" alt="Gallery">
+            </a>
+            <a href="/pages/list.html">
+                <img src="/icon/list.png" alt="List">
+            </a>
+        </div>
+    </body>
+    </html>    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const links = document.querySelectorAll('.navbar a');
+
+    links.forEach(link => {
+        link.addEventListener('click', function() {
+            links.forEach(link => link.classList.remove('active')); // Hapus kelas aktif dari semua ikon
+            this.classList.add('active'); // Tambahkan kelas aktif pada ikon yang diklik
+        });
+    });
+});
+
+    </script>
+</body>
+</html>
